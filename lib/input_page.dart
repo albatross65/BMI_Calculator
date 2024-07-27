@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'ContainerCode.dart';
 import 'IconTextCode.dart';
+import 'ResultFile.dart';
 import 'constant.dart';
 
 enum Gender { male, female }
@@ -183,11 +184,26 @@ class _InputPageState extends State<InputPage> {
             ],
           ),
           // Bottom container
-          Container(
-            color: Color(0xffF3904F),
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: 80.0,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultScreen(),
+                ),
+              );
+            },
+            child: Container(
+              child: Center(
+                  child: Text(
+                    'Calculate',
+                    style: kLabelStyle,
+                  )),
+              color: Color(0xffF3904F),
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: 80.0,
+            ),
           ),
         ],
       ),
@@ -207,15 +223,18 @@ class RoundIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      child: Icon(iconData),
+      child: Icon(
+        iconData,
+        size: 16.0, // Adjust the size as needed
+      ),
       onPressed: onPress,
       elevation: 6.0,
       constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
+        width: 50.0,
+        height: 50.0,
       ),
-      shape: const CircleBorder(),
-      fillColor: const Color(0xff363795),
+      shape: CircleBorder(),
+      fillColor: Color(0xff363795),
     );
   }
 }
