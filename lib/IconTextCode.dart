@@ -8,10 +8,14 @@ class RepeatIconTextCode extends StatelessWidget {
     required this.iconData,
     required this.label,
     this.iconColor,
+    this.textColor,
   }) : super(key: key);
+
   final IconData iconData;
   final String label;
   final Color? iconColor;
+  final Color? textColor;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,7 +36,9 @@ class RepeatIconTextCode extends StatelessWidget {
         SizedBox(height: 15.0),
         Text(
           label,
-          style: kLabelStyle,
+          style: kLabelStyle.copyWith(
+            color: textColor ?? Color(0xff3B4371), // Use textColor if provided
+          ),
         ),
       ],
     );

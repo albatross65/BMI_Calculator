@@ -4,14 +4,16 @@ import 'ContainerCode.dart';
 import 'IconTextCode.dart';
 import 'constant.dart';
 enum Gender { male, female }
-
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
   @override
   State<InputPage> createState() => _InputPageState();
 }
+
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
+  int sliderHeight = 180;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,13 +29,19 @@ class _InputPageState extends State<InputPage> {
                       selectedGender = Gender.male;
                     });
                   },
-                  colors: selectedGender == Gender.male ? activeColor : deActiveColor,
+
+                  colors: selectedGender == Gender.male
+                      ? activeColor
+                      : deActiveColor,
                   cardwidget: RepeatIconTextCode(
                     iconData: FontAwesomeIcons.person,
                     label: 'Male',
                     iconColor: selectedGender == Gender.male ? Colors.black : null,
+                    textColor: selectedGender == Gender.male ? Colors.black : null,
                   ),
-                  border: selectedGender == Gender.male ? Border.all(color: Colors.black) : null,
+                  border: selectedGender == Gender.male
+                      ? Border.all(color: Colors.black, width: 2)
+                      : null,
                 ),
               ),
               Expanded(
@@ -43,13 +51,18 @@ class _InputPageState extends State<InputPage> {
                       selectedGender = Gender.female;
                     });
                   },
-                  colors: selectedGender == Gender.female ? activeColor : deActiveColor,
+                  colors: selectedGender == Gender.female
+                      ? activeColor
+                      : deActiveColor,
                   cardwidget: RepeatIconTextCode(
                     iconData: FontAwesomeIcons.personDress,
                     label: 'Female',
                     iconColor: selectedGender == Gender.female ? Colors.black : null,
+                    textColor: selectedGender == Gender.female ? Colors.black : null,
                   ),
-                  border: selectedGender == Gender.female ? Border.all(color: Colors.black) : null,
+                  border: selectedGender == Gender.female
+                      ? Border.all(color: Colors.black, width: 2)
+                      : null,
                 ),
               ),
             ],
@@ -61,7 +74,34 @@ class _InputPageState extends State<InputPage> {
             cardwidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(child: Text('Height',style: kLabelStyle))
+                Text('Height', style: kLabelStyle),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      sliderHeight.toStringAsFixed(1),
+                      style: kNumberStyle,
+                    ),
+                    Text(
+                      'cm',
+                      style: kLabelStyle,
+                    ),
+                  ],
+                ),
+                Slider(
+                  value: sliderHeight.toDouble(),
+                  min: 120.0,
+                  max: 220.0,
+                  activeColor: Color(0xff363795),
+                  inactiveColor: Color(0xff3B4371),
+                  divisions: 100,
+                  label: sliderHeight.round().toString(),
+                  onChanged: (double newValue) {
+                    setState(() {
+                      sliderHeight = newValue.round();
+                    });
+                  },
+                ),
               ],
             ),
           ),
