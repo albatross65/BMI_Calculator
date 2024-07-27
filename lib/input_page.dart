@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'ContainerCode.dart';
 import 'IconTextCode.dart';
 
 const activeColor = Color(0xffD3783E);
 const deActiveColor = Color(0xffF3904F);
+enum Gender{male,female}
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
-
   @override
   State<InputPage> createState() => _InputPageState();
 }
-
 class _InputPageState extends State<InputPage> {
   Color maleColor = deActiveColor;
   Color femaleColor = deActiveColor;
-
-  void updateColor(int gender) {
-    if (gender == 1) {
+  void updateColor(Gender gendertype) {
+    if (gendertype == Gender.male) {
       maleColor = activeColor;
       femaleColor = deActiveColor;
-    } else if (gender == 2) {
+    } else if (gendertype == Gender.female) {
       femaleColor = activeColor;
       maleColor = deActiveColor;
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,7 +35,7 @@ class _InputPageState extends State<InputPage> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      updateColor(1);
+                      updateColor(Gender.male);
                     });
                   },
                   child: RepeatContainerCode(
@@ -49,8 +45,7 @@ class _InputPageState extends State<InputPage> {
                       label: 'Male',
                       iconColor: maleColor == activeColor ? Colors.black : null,
                     ),
-                    border: maleColor == activeColor ? Border.all(
-                        color: Colors.black) : null,
+                    border: maleColor == activeColor ? Border.all(color: Colors.black) : null,
                   ),
                 ),
               ),
@@ -58,7 +53,7 @@ class _InputPageState extends State<InputPage> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      updateColor(2);
+                      updateColor(Gender.female);
                     });
                   },
                   child: RepeatContainerCode(
@@ -66,12 +61,9 @@ class _InputPageState extends State<InputPage> {
                     cardwidget: RepeatIconTextCode(
                       iconData: FontAwesomeIcons.personDress,
                       label: 'Female',
-                      iconColor: femaleColor == activeColor
-                          ? Colors.black
-                          : null,
+                      iconColor: femaleColor == activeColor ? Colors.black : null,
                     ),
-                    border: femaleColor == activeColor ? Border.all(
-                        color: Colors.black) : null,
+                    border: femaleColor == activeColor ? Border.all(color: Colors.black) : null,
                   ),
                 ),
               ),
