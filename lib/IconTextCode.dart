@@ -24,7 +24,7 @@ class RepeatIconTextCode extends StatelessWidget {
         Icon(
           iconData,
           color: iconColor ?? Color(0xff3B4371), // Use iconColor if provided
-          size: 80.0,
+          size: 90.0,
           shadows: [
             BoxShadow(
               color: Colors.black38,
