@@ -4,101 +4,35 @@ class InputPage extends StatefulWidget {
   @override
   State<InputPage> createState() => _InputPageState();
 }
-
 class _InputPageState extends State<InputPage> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         Expanded(
           child: Row(
             children: [
               Expanded(
-                child: Container(
-                  margin:   EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color:   Color(0XffF3904F),
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset:   Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                ),
+                child: RepeatContainerCode(),
               ),
               Expanded(
-                child: Container(
-                  margin:   EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color:   Color(0XffF3904F),
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset:   Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                ),
+                child: RepeatContainerCode(),
               ),
             ],
           ),
         ),
         Expanded(
-          child: Container(
-            margin: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              color:  Color(0XffF3904F),
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10,
-                  offset:  Offset(2, 2),
-                ),
-              ],
-            ),
-          ),
+          child: RepeatContainerCode(),
         ),
         Expanded(
           child: Row(
             children: [
               Expanded(
-                child: Container(
-                  margin:  EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color:  Color(0XffF3904F),
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                ),
+                child: RepeatContainerCode(),
               ),
               Expanded(
-                child: Container(
-                  margin: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color:  Color(0XffF3904F),
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                ),
+                child: RepeatContainerCode(),
               ),
             ],
           ),
@@ -108,3 +42,24 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
+class RepeatContainerCode extends StatelessWidget {
+  const RepeatContainerCode({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: Color(0XffF3904F),
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10,
+            offset: Offset(2, 2),
+          ),
+        ],
+      ),
+    );
+  }
+}
