@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'input_page.dart';
-
 void main() {
   runApp(const BMICalculator());
 }
@@ -14,7 +13,7 @@ class BMICalculator extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'BMICalculator',
+            'BMI Calculator',
             style: TextStyle(
               fontSize: 22,
               letterSpacing: 2.5,
@@ -22,8 +21,8 @@ class BMICalculator extends StatelessWidget {
               shadows: [
                 BoxShadow(
                   color: Colors.black26,
-                  blurRadius: 10,
-                  offset: Offset(2, 2),
+                  blurRadius: 2,
+                  offset: Offset(3, 1),
                 ),
               ],
             ),
