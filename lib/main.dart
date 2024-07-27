@@ -1,17 +1,49 @@
 import 'package:flutter/material.dart';
+import 'input_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const BMICalculator());
 }
+class BMICalculator extends StatelessWidget {
+  const BMICalculator({super.key});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: AppBar(title: Text('BMI Calculator'),
-    ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'BMICalculator',
+            style: TextStyle(
+              fontSize: 22,
+              letterSpacing: 2.5,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  offset: Offset(2, 2),
+                ),
+              ],
+            ),
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xff3B4371),
+                  Color(0xffF3904F),
+                  Color(0xff3B4371),
+                ],
+              ),
+            ),
+          ),
+        ),
+        body: InputPage(),
+        backgroundColor: Color(0xff3B4371),
+      ),
 
     );
   }
