@@ -4,13 +4,30 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'ContainerCode.dart';
 import 'IconTextCode.dart';
 
+const activeColor = Color(0xffD3783E);
+const deActiveColor = Color(0xffF3904F);
+
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
 
   @override
   State<InputPage> createState() => _InputPageState();
 }
+
 class _InputPageState extends State<InputPage> {
+  Color maleColor = deActiveColor;
+  Color femaleColor = deActiveColor;
+
+  void updateColor(int gender) {
+    if (gender == 1) {
+      maleColor = activeColor;
+      femaleColor = deActiveColor;
+    } else if (gender == 2) {
+      femaleColor = activeColor;
+      maleColor = deActiveColor;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,20 +36,42 @@ class _InputPageState extends State<InputPage> {
           child: Row(
             children: [
               Expanded(
-                child: RepeatContainerCode(
-                  colors: Color(0XffF3904F),
-                  cardwidget: RepeatIconTextCode(
-                    iconData: FontAwesomeIcons.person,
-                    label: 'Male',
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      updateColor(1);
+                    });
+                  },
+                  child: RepeatContainerCode(
+                    colors: maleColor, // Use the constant
+                    cardwidget: RepeatIconTextCode(
+                      iconData: FontAwesomeIcons.person,
+                      label: 'Male',
+                      iconColor: maleColor == activeColor ? Colors.black : null,
+                    ),
+                    border: maleColor == activeColor ? Border.all(
+                        color: Colors.black) : null,
                   ),
                 ),
               ),
               Expanded(
-                child: RepeatContainerCode(
-                  colors: Color(0XffF3904F),
-                  cardwidget: RepeatIconTextCode(
-                    iconData:  FontAwesomeIcons.personDress,
-                    label: 'Female',
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      updateColor(2);
+                    });
+                  },
+                  child: RepeatContainerCode(
+                    colors: femaleColor, // Use the constant
+                    cardwidget: RepeatIconTextCode(
+                      iconData: FontAwesomeIcons.personDress,
+                      label: 'Female',
+                      iconColor: femaleColor == activeColor
+                          ? Colors.black
+                          : null,
+                    ),
+                    border: femaleColor == activeColor ? Border.all(
+                        color: Colors.black) : null,
                   ),
                 ),
               ),
@@ -41,7 +80,7 @@ class _InputPageState extends State<InputPage> {
         ),
         Expanded(
           child: RepeatContainerCode(
-            colors: Color(0XffF3904F),
+            colors: deActiveColor, // Use the constant
           ),
         ),
         Expanded(
@@ -49,7 +88,7 @@ class _InputPageState extends State<InputPage> {
             children: [
               Expanded(
                 child: RepeatContainerCode(
-                  colors: Color(0XffF3904F),
+                  colors: deActiveColor, // Use the constant
                   cardwidget: Column(
                     children: [],
                   ),
@@ -57,7 +96,7 @@ class _InputPageState extends State<InputPage> {
               ),
               Expanded(
                 child: RepeatContainerCode(
-                  colors: Color(0XffF3904F),
+                  colors: deActiveColor, // Use the constant
                   cardwidget: Column(
                     children: [],
                   ), // Replace this with your desired widget

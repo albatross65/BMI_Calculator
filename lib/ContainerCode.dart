@@ -5,9 +5,11 @@ class RepeatContainerCode extends StatelessWidget {
     Key? key,
     required this.colors,
     this.cardwidget,
+    this.border,
   }) : super(key: key);
 
   final Color colors;
+  final Border? border;
   final Widget? cardwidget;
 
   @override
@@ -17,6 +19,7 @@ class RepeatContainerCode extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors,
         borderRadius: BorderRadius.circular(10.0),
+        border: border, // Use border if provided
         boxShadow: [
           BoxShadow(
             color: Colors.black26,

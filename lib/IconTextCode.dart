@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+
 class RepeatIconTextCode extends StatelessWidget {
   const RepeatIconTextCode({
     Key? key,
     required this.iconData,
     required this.label,
+    this.iconColor,
   }) : super(key: key);
 
   final IconData iconData;
   final String label;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class RepeatIconTextCode extends StatelessWidget {
       children: [
         Icon(
           iconData,
-          color: Color(0xff3B4371),
+          color: iconColor ?? Color(0xff3B4371), // Use iconColor if provided
           size: 80.0,
           shadows: [
             BoxShadow(
