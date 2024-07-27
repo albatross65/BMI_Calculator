@@ -5,6 +5,7 @@ import 'IconTextCode.dart';
 
 const activeColor = Color(0xffD3783E);
 const deActiveColor = Color(0xffF3904F);
+
 enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender? selectGender; // Initialize with a default value
+  Gender? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -25,39 +26,45 @@ class _InputPageState extends State<InputPage> {
           child: Row(
             children: [
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
+                child: RepeatContainerCode(
+                  onPressed: () {
                     setState(() {
-                      selectGender = Gender.male; // Update state to male
+                      selectedGender = Gender.male;
                     });
                   },
-                  child: RepeatContainerCode(
-                    colors: selectGender == Gender.male ? activeColor : deActiveColor,
-                    cardwidget: RepeatIconTextCode(
-                      iconData: FontAwesomeIcons.person,
-                      label: 'Male',
-                      iconColor: selectGender == Gender.male ? Colors.black : null,
-                    ),
-                    border: selectGender == Gender.male ? Border.all(color: Colors.black) : null,
+                  colors: selectedGender == Gender.male
+                      ? activeColor
+                      : deActiveColor,
+                  cardwidget: RepeatIconTextCode(
+                    iconData: FontAwesomeIcons.person,
+                    label: 'Male',
+                    iconColor:
+                        selectedGender == Gender.male ? Colors.black : null,
                   ),
+                  border: selectedGender == Gender.male
+                      ? Border.all(color: Colors.black)
+                      : null,
                 ),
               ),
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
+                child: RepeatContainerCode(
+                  onPressed: () {
                     setState(() {
-                      selectGender = Gender.female; // Update state to female
+                      selectedGender = Gender.female;
                     });
                   },
-                  child: RepeatContainerCode(
-                    colors: selectGender == Gender.female ? activeColor : deActiveColor,
-                    cardwidget: RepeatIconTextCode(
-                      iconData: FontAwesomeIcons.personDress,
-                      label: 'Female',
-                      iconColor: selectGender == Gender.female ? Colors.black : null,
-                    ),
-                    border: selectGender == Gender.female ? Border.all(color: Colors.black) : null,
+                  colors: selectedGender == Gender.female
+                      ? activeColor
+                      : deActiveColor,
+                  cardwidget: RepeatIconTextCode(
+                    iconData: FontAwesomeIcons.personDress,
+                    label: 'Female',
+                    iconColor:
+                        selectedGender == Gender.female ? Colors.black : null,
                   ),
+                  border: selectedGender == Gender.female
+                      ? Border.all(color: Colors.black)
+                      : null,
                 ),
               ),
             ],
