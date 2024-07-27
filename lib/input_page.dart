@@ -3,9 +3,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'ContainerCode.dart';
 import 'IconTextCode.dart';
 import 'constant.dart';
+
 enum Gender { male, female }
+
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
+
   @override
   State<InputPage> createState() => _InputPageState();
 }
@@ -14,14 +17,16 @@ class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int sliderHeight = 180;
   int sliderWeight = 60;
+  int sliderAge = 20;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: Row(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Gender selection row
+          Row(
             children: [
               Expanded(
                 child: RepeatContainerCode(
@@ -30,15 +35,16 @@ class _InputPageState extends State<InputPage> {
                       selectedGender = Gender.male;
                     });
                   },
-
                   colors: selectedGender == Gender.male
                       ? activeColor
                       : deActiveColor,
                   cardwidget: RepeatIconTextCode(
                     iconData: FontAwesomeIcons.person,
                     label: 'Male',
-                    iconColor: selectedGender == Gender.male ? Colors.black : null,
-                    textColor: selectedGender == Gender.male ? Colors.black : null,
+                    iconColor:
+                    selectedGender == Gender.male ? Colors.black : null,
+                    textColor:
+                    selectedGender == Gender.male ? Colors.black : null,
                   ),
                   border: selectedGender == Gender.male
                       ? Border.all(color: Colors.black, width: 2)
@@ -58,8 +64,10 @@ class _InputPageState extends State<InputPage> {
                   cardwidget: RepeatIconTextCode(
                     iconData: FontAwesomeIcons.personDress,
                     label: 'Female',
-                    iconColor: selectedGender == Gender.female ? Colors.black : null,
-                    textColor: selectedGender == Gender.female ? Colors.black : null,
+                    iconColor:
+                    selectedGender == Gender.female ? Colors.black : null,
+                    textColor:
+                    selectedGender == Gender.female ? Colors.black : null,
                   ),
                   border: selectedGender == Gender.female
                       ? Border.all(color: Colors.black, width: 2)
@@ -68,9 +76,8 @@ class _InputPageState extends State<InputPage> {
               ),
             ],
           ),
-        ),
-        Expanded(
-          child: RepeatContainerCode(
+          // Height slider
+          RepeatContainerCode(
             colors: deActiveColor,
             cardwidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +87,7 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      sliderHeight.toStringAsFixed(1),
+                      sliderHeight.toString(),
                       style: kNumberStyle,
                     ),
                     Text(
@@ -93,10 +100,10 @@ class _InputPageState extends State<InputPage> {
                   value: sliderHeight.toDouble(),
                   min: 120.0,
                   max: 220.0,
-                  activeColor: Color(0xff363795),
-                  inactiveColor: Color(0xff3B4371),
+                  activeColor: const Color(0xff363795),
+                  inactiveColor: const Color(0xff3B4371),
                   divisions: 100,
-                  label: sliderHeight.round().toString(),
+                  label: sliderHeight.toString(),
                   onChanged: (double newValue) {
                     setState(() {
                       sliderHeight = newValue.round();
@@ -106,9 +113,8 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-        ),
-        Expanded(
-          child: Row(
+          // Weight and Age sliders
+          Row(
             children: [
               Expanded(
                 child: RepeatContainerCode(
@@ -118,6 +124,26 @@ class _InputPageState extends State<InputPage> {
                     children: [
                       Text('Weight', style: kLabelStyle),
                       Text(sliderWeight.toString(), style: kNumberStyle),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIcon(
+                              iconData: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  sliderWeight--;
+                                });
+                              }),
+                          SizedBox(width: 10),
+                          RoundIcon(
+                              iconData: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  sliderWeight++;
+                                });
+                              })
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -128,14 +154,68 @@ class _InputPageState extends State<InputPage> {
                   cardwidget: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text('Age', style: kLabelStyle),
+                      Text(sliderAge.toString(), style: kNumberStyle),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIcon(
+                              iconData: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  sliderAge--;
+                                });
+                              }),
+                          SizedBox(width: 10),
+                          RoundIcon(
+                              iconData: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  sliderAge++;
+                                });
+                              })
+                        ],
+                      )
                     ],
                   ),
                 ),
               ),
             ],
           ),
-        ),
-      ],
+          // Bottom container
+          Container(
+            color: Color(0xffF3904F),
+            margin: EdgeInsets.only(top: 10.0),
+            width: double.infinity,
+            height: 80.0,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class RoundIcon extends StatelessWidget {
+  const RoundIcon({
+    required this.iconData,
+    required this.onPress,
+  });
+
+  final IconData iconData;
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(iconData),
+      onPressed: onPress,
+      elevation: 6.0,
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      shape: const CircleBorder(),
+      fillColor: const Color(0xff363795),
     );
   }
 }
