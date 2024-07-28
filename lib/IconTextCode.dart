@@ -23,7 +23,7 @@ class RepeatIconTextCode extends StatelessWidget {
       children: [
         Icon(
           iconData,
-          color: iconColor ?? Color(0xff3B4371), // Use iconColor if provided
+          color: iconColor ?? Color(0xff111328), // Use iconColor if provided
           size: 90.0,
           shadows: [
             BoxShadow(
@@ -37,7 +37,7 @@ class RepeatIconTextCode extends StatelessWidget {
         Text(
           label,
           style: kLabelStyle.copyWith(
-            color: textColor ?? Color(0xff3B4371), // Use textColor if provided
+            color: textColor ?? Color(0xff111328), // Use textColor if provided
           ),
         ),
       ],

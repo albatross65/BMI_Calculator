@@ -4,7 +4,7 @@ const deActiveColor = Color(0xffF3904F);
 const kLabelStyle = TextStyle(
   fontSize: 22,
   fontWeight: FontWeight.bold,
-  color: Color(0xff3B4371),  // Default color
+  color: Color(0xff111328),  // Default color
   shadows: [
     Shadow(
       color: Colors.black38,
@@ -17,6 +17,7 @@ const kLabelStyle = TextStyle(
 const kNumberStyle=TextStyle(
   fontSize: 50,
   fontWeight: FontWeight.w900,
+  color: Colors.black,
   shadows: [
     Shadow(
       color: Colors.black38,

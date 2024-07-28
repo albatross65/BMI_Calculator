@@ -1,15 +1,22 @@
-import 'package:bmi_calculator/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'constant.dart';
 import 'ContainerCode.dart';
 import 'input_page.dart';
+import 'CalculatorFile.dart';
+
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+  ResultScreen(
+      {required this.interpretation,
+        required this.bmiResult,
+        required this.resultText});
+
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -31,22 +38,24 @@ class ResultScreen extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xff3B4371),
+                Color(0xff111328),
                 Color(0xffF3904F),
-                Color(0xff3B4371),
+                Color(0xff111328),
               ],
             ),
           ),
         ),
+        iconTheme: IconThemeData(
+          color: Colors.white, // This will change the color of the back arrow to white
+        ),
       ),
-      body:
-      Container(
+      body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xff3B4371),
+              Color(0xff111328),
               Color(0xffF3904F),
-              Color(0xff3B4371),
+              Color(0xff111328),
             ],
           ),
         ),
@@ -57,47 +66,63 @@ class ResultScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 child: Center(
-                  child: Text('Your Results',style: kTittleStyle),
+                  child: Text('Your Results', style: kTittleStyle),
                 ),
               ),
             ),
             Expanded(
               flex: 5,
               child: RepeatContainerCode(
-                colors:activeColor ,
+                colors: activeColor,
                 cardwidget: Column(
-                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children: [
-                   Text('Normal',style: kLabelStyle),
-                   Text('18.3',style: kTittleStyle),
-                   Text('BMI is low You should have to work more.',style: kLabelStyle),
-                 ],
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(resultText.toUpperCase(), style: kLabelStyle),
+                    Text(bmiResult, style: kTittleStyle),
+                    Text(interpretation, style: kLabelStyle),
+                  ],
                 ),
-
               ),
             ),
-            Expanded(child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => InputPage(),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => InputPage(),
+                    ),
+                  );
+                },
+                child: Container(
+                  child: Center(
+                      child: Text(
+                        'ReCalculate',
+                        style: kLabelStyle.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xffD3783E), Color(0xffF3904F)],
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 5.0,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
-                );
-              },
-              child: Container(
-                child: Center(
-                    child: Text(
-                      'ReCalculate',
-                      style: kLabelStyle,
-                    )),
-                color: Color(0xffF3904F),
-                margin: EdgeInsets.only(top: 10.0),
-                width: double.infinity,
-                height: 80.0,
+                  margin: EdgeInsets.only(top: 10.0),
+                  width: double.infinity,
+                  height: 80.0,
+                ),
               ),
-            ), ),
+            ),
           ],
         ),
       ),

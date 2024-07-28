@@ -4,8 +4,10 @@ import 'ContainerCode.dart';
 import 'IconTextCode.dart';
 import 'ResultFile.dart';
 import 'constant.dart';
+import 'CalculatorFile.dart';
 
 enum Gender { male, female }
+enum HeightUnit { cm, feetInches }
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -16,7 +18,10 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
-  int sliderHeight = 180;
+  HeightUnit selectedHeightUnit = HeightUnit.cm;
+  int heightCm = 180;
+  int heightFeet = 5;
+  int heightInches = 11;
   int sliderWeight = 60;
   int sliderAge = 20;
 
@@ -44,9 +49,9 @@ class _InputPageState extends State<InputPage> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xff3B4371),
+                Color(0xff111328),
                 Color(0xffF3904F),
-                Color(0xff3B4371),
+                Color(0xff111328),
               ],
             ),
           ),
@@ -54,7 +59,7 @@ class _InputPageState extends State<InputPage> {
       ),
       body: SingleChildScrollView(
         child: Material(
-          color: Color(0xff3B4371),
+          color: Color(0xff111328),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -96,10 +101,12 @@ class _InputPageState extends State<InputPage> {
                       cardwidget: RepeatIconTextCode(
                         iconData: FontAwesomeIcons.personDress,
                         label: 'Female',
-                        iconColor:
-                        selectedGender == Gender.female ? Colors.black : null,
-                        textColor:
-                        selectedGender == Gender.female ? Colors.black : null,
+                        iconColor: selectedGender == Gender.female
+                            ? Colors.black
+                            : null,
+                        textColor: selectedGender == Gender.female
+                            ? Colors.black
+                            : null,
                       ),
                       border: selectedGender == Gender.female
                           ? Border.all(color: Colors.black, width: 2)
@@ -117,30 +124,131 @@ class _InputPageState extends State<InputPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          sliderHeight.toString(),
-                          style: kNumberStyle,
-                        ),
-                        Text(
-                          'cm',
-                          style: kLabelStyle,
+                        ToggleButtons(
+                          isSelected: [
+                            selectedHeightUnit == HeightUnit.cm,
+                            selectedHeightUnit == HeightUnit.feetInches
+                          ],
+                          onPressed: (int index) {
+                            setState(() {
+                              selectedHeightUnit = index == 0
+                                  ? HeightUnit.cm
+                                  : HeightUnit.feetInches;
+                            });
+                          },
+                          color: Colors.white, // Text color when unselected
+                          selectedColor: Colors.black, // Text color when selected
+                          fillColor: activeColor, // Background color when selected
+                          borderColor: deActiveColor,
+                          selectedBorderColor: activeColor,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Text(
+                                'cm',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: selectedHeightUnit == HeightUnit.cm
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Text(
+                                'ft/in',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: selectedHeightUnit == HeightUnit.feetInches
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    Slider(
-                      value: sliderHeight.toDouble(),
-                      min: 120.0,
-                      max: 220.0,
-                      activeColor:  Color(0xff363795),
-                      inactiveColor:  Color(0xff3B4371),
-                      divisions: 100,
-                      label: sliderHeight.toString(),
-                      onChanged: (double newValue) {
-                        setState(() {
-                          sliderHeight = newValue.round();
-                        });
-                      },
-                    ),
+                    if (selectedHeightUnit == HeightUnit.cm)
+                      Column(
+                        children: [
+                          Text(heightCm.toString(), style: kNumberStyle),
+                          Slider(
+                            value: heightCm.toDouble(),
+                            min: 120.0,
+                            max: 220.0,
+                            activeColor: Color(0xff1D1E33),
+                            inactiveColor: Color(0xff111328),
+                            divisions: 100,
+                            label: heightCm.toString(),
+                            onChanged: (double newValue) {
+                              setState(() {
+                                heightCm = newValue.round();
+                              });
+                            },
+                          ),
+                        ],
+                      )
+                    else
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Text('Feet', style: kLabelStyle),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.remove, color: Color(0xff111328)),  // Set the color to body color
+                                    onPressed: () {
+                                      setState(() {
+                                        if (heightFeet > 1) heightFeet--;
+                                      });
+                                    },
+                                  ),
+                                  Text(heightFeet.toString(), style: kNumberStyle),
+                                  IconButton(
+                                    icon: Icon(Icons.add, color: Color(0xff111328)),  // Set the color to body color
+                                    onPressed: () {
+                                      setState(() {
+                                        if (heightFeet < 8) heightFeet++;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 16.0),
+                          Column(
+                            children: [
+                              Text('Inches', style: kLabelStyle),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.remove, color: Color(0xff111328)),  // Set the color to body color
+                                    onPressed: () {
+                                      setState(() {
+                                        if (heightInches > 0) heightInches--;
+                                      });
+                                    },
+                                  ),
+                                  Text(heightInches.toString(), style: kNumberStyle),
+                                  IconButton(
+                                    icon: Icon(Icons.add, color: Color(0xff111328)),  // Set the color to body color
+                                    onPressed: () {
+                                      setState(() {
+                                        if (heightInches < 11) heightInches++;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),
@@ -214,10 +322,19 @@ class _InputPageState extends State<InputPage> {
               ),
               GestureDetector(
                 onTap: () {
+                  int heightInCm = selectedHeightUnit == HeightUnit.cm
+                      ? heightCm
+                      : (heightFeet * 30.48 + heightInches * 2.54).round();
+                  CalculatorBrain calc = CalculatorBrain(
+                      height: heightInCm, weight: sliderWeight);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ResultScreen(),
+                      builder: (context) => ResultScreen(
+                        bmiResult: calc.calculateBMI(),
+                        resultText: calc.getResult(),
+                        interpretation: calc.getInterpretation(),
+                      ),
                     ),
                   );
                 },
@@ -225,9 +342,24 @@ class _InputPageState extends State<InputPage> {
                   child: Center(
                       child: Text(
                         'Calculate',
-                        style: kLabelStyle,
+                        style: kLabelStyle.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       )),
-                  color: Color(0xffF3904F),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xffF3904F), Color(0xffD3783E)],
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 5.0,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
                   margin: EdgeInsets.only(top: 10.0),
                   width: double.infinity,
                   height: 80.0,
@@ -255,7 +387,8 @@ class RoundIcon extends StatelessWidget {
     return RawMaterialButton(
       child: Icon(
         iconData,
-        size: 16.0, // Adjust the size as needed
+        size: 16.0,
+        color: Colors.white // Set the color to body color
       ),
       onPressed: onPress,
       elevation: 6.0,
@@ -264,7 +397,7 @@ class RoundIcon extends StatelessWidget {
         height: 45.0,
       ),
       shape: CircleBorder(),
-      fillColor: Color(0xff363795),
+      fillColor: Color(0xff1D1E33),
     );
   }
 }
