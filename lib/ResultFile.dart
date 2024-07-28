@@ -8,11 +8,13 @@ class ResultScreen extends StatelessWidget {
   ResultScreen(
       {required this.interpretation,
         required this.bmiResult,
-        required this.resultText});
+        required this.resultText,
+        required this.weightAdjustment});
 
   final String bmiResult;
   final String resultText;
   final String interpretation;
+  final String weightAdjustment;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,7 @@ class ResultScreen extends StatelessWidget {
                     Text(resultText.toUpperCase(), style: kLabelStyle),
                     Text(bmiResult, style: kTittleStyle),
                     Text(interpretation, style: kLabelStyle),
+                    Text(weightAdjustment, style: kLabelStyle),
                   ],
                 ),
               ),

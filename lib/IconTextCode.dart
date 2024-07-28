@@ -29,7 +29,7 @@ class RepeatIconTextCode extends StatelessWidget {
             BoxShadow(
               color: Colors.black38,
               blurRadius: 2,
-              offset: Offset(2, 3),
+              offset: Offset(2, 1),
             )
           ],
         ),

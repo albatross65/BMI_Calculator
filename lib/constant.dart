@@ -9,7 +9,7 @@ const kLabelStyle = TextStyle(
     Shadow(
       color: Colors.black38,
       blurRadius: 2,
-      offset: Offset(3, 2),
+      offset: Offset(2, 1),
     ),
   ],
 );
@@ -22,7 +22,7 @@ const kNumberStyle=TextStyle(
     Shadow(
       color: Colors.black38,
       blurRadius: 2,
-      offset: Offset(3, 2),
+      offset: Offset(2, 1),
     ),
   ],
 );
@@ -40,7 +40,7 @@ const kTittleStyle = TextStyle(
     Shadow(
       color: Colors.black38,
       blurRadius: 2,
-      offset: Offset(3, 2),
+      offset: Offset(2, 1),
     ),
   ],
 );

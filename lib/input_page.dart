@@ -334,6 +334,7 @@ class _InputPageState extends State<InputPage> {
                         bmiResult: calc.calculateBMI(),
                         resultText: calc.getResult(),
                         interpretation: calc.getInterpretation(),
+                        weightAdjustment: calc.getWeightAdjustment(),
                       ),
                     ),
                   );
@@ -365,6 +366,7 @@ class _InputPageState extends State<InputPage> {
                   height: 80.0,
                 ),
               ),
+
             ],
           ),
         ),
